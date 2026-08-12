@@ -10,11 +10,11 @@ function hero() {
         <div className="wrapper nav-list flex justify-between items-center ">
           <p className="sm:text-2xl text-[20px] font-bold text-[#1b1b1b]">EVENTS</p>
           <div className="btns flex gap-2">
-            <Link to={'sign-up'} className="cursor-pointer text-[#1b1b1b] text-[15px] sm:text-[17px]">
+            <Link to={'/sign-up'} className="cursor-pointer text-[#1b1b1b] text-[15px] sm:text-[17px]">
               Sign Up
             </Link>
             <p className="text-[15px] sm:text-[17px]">/</p>
-            <Link to={'log-in'} className="cursor-pointer text-[#1b1b1b] text-[15px] sm:text-[17px]">
+            <Link to={'/log-in'} className="cursor-pointer text-[#1b1b1b] text-[15px] sm:text-[17px]">
               Log In
             </Link>
           </div>
@@ -23,7 +23,7 @@ function hero() {
         <div className="hero-section wrapper flex justify-center items-center flex-col gap-2 min-h-[70vh]">
             <p className="italic text-[#1b1b1b]">Create. Connect. Celebrate.</p>
             <p className="text-[#1b1b1b] font-bold sm:text-4xl text-3xl">Events, simplified</p>
-            <Link to={'sign-up'} className="bg-purple-900 text-white font-medium py-1 px-3 rounded-[10px] hover:bg-purple-800 cursor-pointer mt-2">Get started</Link>
+            <Link to={'/sign-up'} className="bg-purple-800 text-white font-medium py-1 px-3 rounded-[10px] hover:bg-purple-700 cursor-pointer mt-2">Get started</Link>
         </div>
       </div>
     </>
