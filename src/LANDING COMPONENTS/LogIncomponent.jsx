@@ -19,7 +19,7 @@ function LogIncomponent() {
     e.preventDefault();
     try {
       const res = await axios.post("http://localhost:5000/log-in", user);
-      alert("LoggedIn");
+      localStorage.setItem('token', res.data.token);
       setMessage(res.data.message);
     } catch (error) {
       console.log('Error during LogIn', error);
