@@ -4,6 +4,7 @@ import { useState } from "react";
 import axios from 'axios'
 
 function LogIncomponent() {
+  const navigate = useNavigate();
   const [user, setUser] = useState({
     username: "",
     password: "",
@@ -19,8 +20,16 @@ function LogIncomponent() {
     e.preventDefault();
     try {
       const res = await axios.post("http://localhost:5000/log-in", user);
+      console.log('loggin res' , res.data)
       localStorage.setItem('token', res.data.token);
       setMessage(res.data.message);
+      const role = res.data.role;
+      if(role==='attendee'){
+        navigate('/attendee-dashboard')
+      };
+      if(role==='organizer'){
+        navigate('/host-dashboard')
+      }
     } catch (error) {
       console.log('Error during LogIn', error);
       setMessage(error.response?.data?.message);
