@@ -11,6 +11,7 @@ function SignUpcomponent() {
     email: "",
     username: "",
     password: "",
+    role:"attendee"
   });
   const[message,setMessage] = useState('');
 
@@ -24,7 +25,7 @@ function SignUpcomponent() {
 
     try {
       const res = await axios.post("http://localhost:5000/sign-up", user);
-      console.log("Sign Up Form Submitted");
+      console.log("Sign Up Form Submitted", user);
       setMessage(res.data.message)
       setUser({
         firstName: "",
@@ -32,6 +33,7 @@ function SignUpcomponent() {
         email: "",
         username: "",
         password: "",
+        role:"attendee"
       });
       navigate('/log-in');
     } catch (error) {
@@ -41,7 +43,7 @@ function SignUpcomponent() {
   }
 
   return (
-    <div className="wrapper flex flex-col gap-10 items-center h-[85dvh] justify-center">
+    <div className="wrapper flex flex-col gap-10 items-center h-[90dvh] justify-center">
       <p className="font-bold text-3xl text-[#2c2c2c]">Create an Account</p>
       <form action="" onSubmit={handleSubmit} className="flex flex-col gap-6">
         <input
@@ -84,6 +86,10 @@ function SignUpcomponent() {
           onChange={getInput}
           placeholder="Password"
         />
+        <select name="role" value={user.role} onChange={getInput} id="" className="focus:outline-none border-b-1 pb-2 border-gray-200 px-4">
+          <option value={'attendee'} className="">Attendee</option>
+          <option value={'organizer'} className="">Organizer</option>
+        </select>
         <p className="text-red-900">{message}</p>
         <button
           type="Submit"
