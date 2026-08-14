@@ -1,6 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 
 function PostEvent() {
+    const [event,setEvent] = useState({
+        title:'',
+        description:'',
+        category:'',
+        venue:'',
+        city:'',
+        date:'',
+        startAt:'',
+        endAt:'',
+        capacity:'',
+        contact:'',
+        organizerName:''
+    });
+
+    function getInput(e){
+        const {name,value} = e.target;
+        setEvent({...event,[name]:value});
+        console.log({...event,[name]:value})
+    }
   return (
     <>
       <div className="wrapper flex flex-col items-center justify-center py-10 gap-10">
@@ -10,11 +29,13 @@ function PostEvent() {
         <form action="" className="flex flex-col gap-9 w-[900px]">
           <h1 className="text-[18px] font-medium">Event Details:</h1>
           <div className="flex flex-col gap-5">
-            <label htmlFor="title ">Event Title:</label>
+            <label htmlFor="title">Event Title:</label>
             <input
               type="text"
               id="title"
               name="title"
+              value={event.title}
+              onChange={getInput}
               placeholder="Title"
               className="border-1 border-gray-300 rounded-[6px] py-2 px-3 focus:outline-none"
             />
@@ -22,11 +43,14 @@ function PostEvent() {
 
           <div className="flex flex-col gap-5">
             <label htmlFor="description">Event Description:</label>
-            <input
+            <textarea
               type="text"
               id="description"
               name="description"
-              placeholder="Title"
+              value={event.description}
+              onChange={getInput}
+              placeholder="Describe your event"
+              rows="5"
               className="border-1 border-gray-300 rounded-[6px] py-2 px-3 focus:outline-none"
             />
           </div>
@@ -39,6 +63,8 @@ function PostEvent() {
                   type="radio"
                   id="tech"
                   name="category"
+                  value="tech"
+                  onChange={getInput}
                   className="accent-purple-900"
                 />
                 <label htmlFor="tech">Tech</label>
@@ -49,6 +75,8 @@ function PostEvent() {
                   type="radio"
                   id="workshop"
                   name="category"
+                  value="workshop"
+                  onChange={getInput}
                   className="accent-purple-900"
                 />
                 <label htmlFor="workshop">Workshop</label>
@@ -59,6 +87,8 @@ function PostEvent() {
                   type="radio"
                   id="education"
                   name="category"
+                  value="education"
+                  onChange={getInput}
                   className="accent-purple-900"
                 />
                 <label htmlFor="education">Education</label>
@@ -69,6 +99,8 @@ function PostEvent() {
                   type="radio"
                   id="sports"
                   name="category"
+                  value="sports"
+                  onChange={getInput}
                   className="accent-purple-900"
                 />
                 <label htmlFor="sports">Sports</label>
@@ -79,6 +111,8 @@ function PostEvent() {
                   type="radio"
                   id="business"
                   name="category"
+                  value="business"
+                  onChange={getInput}
                   className="accent-purple-900"
                 />
                 <label htmlFor="business">Business</label>
@@ -92,6 +126,8 @@ function PostEvent() {
               type="text"
               id="venue"
               name="venue"
+              value={event.venue}
+              onChange={getInput}
               placeholder="Venue"
               className="border-1 border-gray-300 rounded-[6px] py-2 px-3 focus:outline-none"
             />
@@ -101,12 +137,12 @@ function PostEvent() {
             <p>Select City:</p>
             <div className="flex gap-10">
               <div className="flex gap-2">
-                <input type="radio" id="Lahore" name="city" />
+                <input type="radio" id="Lahore" name="city" value="Lahore" onChange={getInput} className="accent-purple-900"/>
                 <label htmlFor="Lahore">Lahore</label>
               </div>
 
               <div className="flex gap-2">
-                <input type="radio" id="Islamabad" name="city" />
+                <input type="radio" id="Islamabad" name="city" value="Islamabad" onChange={getInput} className="accent-purple-900"/>
                 <label htmlFor="Islamabad">Islamabad</label>
               </div>
             </div>
@@ -117,26 +153,32 @@ function PostEvent() {
             <input
               type="date"
               name="date"
+              value={event.date}
+              onChange={getInput}
               className="border-1 border-gray-300 rounded-[6px] py-2 px-3 focus:outline-none:"
             />
           </div>
 
           <div className="flex flex-col gap-5">
-            <label for="startAt">Starting Time:</label>
+            <label htmlFor="startAt">Starting Time:</label>
             <input
               type="time"
               id="startAt"
               name="startAt"
+              value={event.startAt}
+              onChange={getInput}
               className="border-1 border-gray-300 rounded-[6px] py-2 px-3 focus:outline-none"
             />
           </div>
 
           <div className="flex flex-col gap-5">
-            <label for="endAt">Ending Time:</label>
+            <label htmlFor="endAt">Ending Time:</label>
             <input
               type="time"
               id="endAt"
               name="endAt"
+              value={event.endAt}
+              onChange={getInput}
               className="border-1 border-gray-300 rounded-[6px] py-2 px-3 focus:outline-none"
             />
           </div>
@@ -144,9 +186,12 @@ function PostEvent() {
           <div className="flex flex-col gap-5">
             <label htmlFor="capacity">Capacity:</label>
             <input
-              type="text"
+              type="number"
+              min="1"
               id="capacity"
               name="capacity"
+              value={event.capacity}
+              onChange={getInput}
               placeholder="capacity"
               className="border-1 border-gray-300 rounded-[6px] py-2 px-3 focus:outline-none"
             />
@@ -161,6 +206,8 @@ function PostEvent() {
               <input
                 type="text"
                 name="organizerName"
+                value={event.organizerName}
+                onChange={getInput}
                 id="organizerName"
                 placeholder="Name"
                 className="border-1 border-gray-300 rounded-[6px] py-2 px-3 focus:outline-none"
@@ -172,6 +219,8 @@ function PostEvent() {
               <input
                 type="text"
                 name="contact"
+                value={event.contact}
+                onChange={getInput}
                 id="contact"
                 placeholder="Contact"
                 className="border-1 border-gray-300 rounded-[6px] py-2 px-3 focus:outline-none"
