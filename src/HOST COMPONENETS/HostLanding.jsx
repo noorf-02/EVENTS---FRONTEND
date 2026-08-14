@@ -81,9 +81,9 @@ function HostLanding() {
         )}
       </div>
       {/* DESKTOP  */}
-      <div className="sidebar-container h-dvh md:flex hidden text-[#2e2e2e]">
-        <aside className="bg-gray-100 lg:w-[250px] md:w-[210px] flex flex-col border-r-2 border-gray-200 h-dvh">
-          <div className="aside-items wrapper flex flex-col h-full justify-between">
+      <div className="sidebar-container min-h-dvh md:flex hidden text-[#2e2e2e]">
+        <aside className="bg-gray-100 lg:w-[250px] md:w-[210px] flex flex-col border-r-2 border-gray-200 min-h-dvh">
+          <div className="aside-items wrapper flex flex-col h-[85dvh] justify-between">
             <div>
               <h1 className="text-2xl font-bold text-[#3e3e3e]">EVENTS</h1>
               <p className="text-[15px] italic">Organizer's Dashboard</p>

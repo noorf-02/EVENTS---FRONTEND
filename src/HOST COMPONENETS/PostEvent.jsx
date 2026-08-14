@@ -3,23 +3,30 @@ import React from "react";
 function PostEvent() {
   return (
     <>
-      <div className="wrapper">
+      <div className="wrapper flex flex-col items-center justify-center py-10 gap-10">
         <h1 className="text-3xl font-medium text-[#3e3e3e]">
           Make your event today!
         </h1>
-        <form action="">
-          <div>
-            <label htmlFor="title">Event Title</label>
-            <input type="text" id="title" name="title" placeholder="Title" />
+        <form action="" className="flex flex-col gap-5">
+          <div className="flex flex-col gap-1">
+            <label htmlFor="title ">Event Title</label>
+            <input
+              type="text"
+              id="title"
+              name="title"
+              placeholder="Title"
+              className="border-1 border-gray-300 rounded-[6px] py-2 px-3 w-[720px] focus:outline-none"
+            />
           </div>
 
-          <div>
+          <div className="flex flex-col gap-1">
             <label htmlFor="description">Event Description</label>
             <input
               type="text"
               id="description"
               name="description"
               placeholder="Title"
+              className="border-1 border-gray-300 rounded-[6px] py-2 px-3 w-[720px] focus:outline-none"
             />
           </div>
 
@@ -37,9 +44,15 @@ function PostEvent() {
             <label htmlFor="business">Business</label>
           </div>
 
-          <div>
+          <div className="flex flex-col gap-1">
             <label htmlFor="venue">Event Venue</label>
-            <input type="text" id="venue" name="venue" placeholder="Venue" />
+            <input
+              type="text"
+              id="venue"
+              name="venue"
+              placeholder="Venue"
+              className="border-1 border-gray-300 rounded-[6px] py-2 px-3 w-[720px] focus:outline-none"
+            />
           </div>
 
           <div>
@@ -65,29 +78,40 @@ function PostEvent() {
             <input type="time" id="endAt" name="endAt"></input>
           </div>
 
-          <div>
+          <div className="flex flex-col gap-1">
             <label htmlFor="capacity">Capacity</label>
             <input
               type="text"
               id="capacity"
               name="capacity"
               placeholder="capacity"
+              className="border-1 border-gray-300 rounded-[6px] py-2 px-3 w-[720px] focus:outline-none"
             />
           </div>
 
-
           <div className="organizers-info">
             <p>Organizer Details</p>
-            <div>
-                <label htmlFor="organizerName">Organizer's Name</label>
-                <input type="text" name="organizerName" id="organizerName" placeholder="Name" />
+            <div className="flex flex-col gap-1">
+              <label htmlFor="organizerName">Organizer's Name</label>
+              <input
+                type="text"
+                name="organizerName"
+                id="organizerName"
+                placeholder="Name"
+                className="border-1 border-gray-300 rounded-[6px] py-2 px-3 w-[720px] focus:outline-none"
+              />
             </div>
 
-            <div>
-                <label htmlFor="contact">Organizer's Contact</label>
-                <input type="text" name="contact" id="contact" placeholder="Contact" />
+            <div className="flex flex-col gap-1">
+              <label htmlFor="contact">Organizer's Contact</label>
+              <input
+                type="text"
+                name="contact"
+                id="contact"
+                placeholder="Contact"
+                className="border-1 border-gray-300 rounded-[6px] py-2 px-3 w-[720px] focus:outline-none"
+              />
             </div>
-
           </div>
         </form>
       </div>
