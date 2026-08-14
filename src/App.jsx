@@ -10,6 +10,7 @@ import ApprovalPending from './HOST COMPONENETS/ApprovalPending'
 import ApprovedEvents from './HOST COMPONENETS/ApprovedEvents'
 import HostLanding from './HOST COMPONENETS/HostLanding'
 import Dashboard from './HOST COMPONENETS/Dashboard'
+import LogOut from './HOST COMPONENETS/LogOut'
 
 function App() {
   return (
@@ -18,14 +19,14 @@ function App() {
       <Route path='/' element={<LandingPage/>}/>
       <Route path='/log-in' element={<LogIn/>}/>
       <Route path='/sign-up' element={<SignUp/>}/>
-      
+
       <Route path='/host-dashboard' element={<HostLanding/>}>
       <Route index element={<Dashboard/>} />
 
       <Route path='post-event' element={<PostEvent/>}/>      
       <Route path='pending-approvals' element={<ApprovalPending/>}/>      
-      <Route path='events-live' element={<ApprovedEvents/>}/>      
-      
+      <Route path='events-live' element={<ApprovedEvents/>}/>
+
       </Route>
 
       <Route path='/attendee-dashboard' element={<AttendeeDashboard/>}/>
