@@ -44,7 +44,6 @@ function PostEvent() {
           <div className="flex flex-col gap-5">
             <label htmlFor="description">Event Description:</label>
             <textarea
-              type="text"
               id="description"
               name="description"
               value={event.description}
@@ -65,6 +64,7 @@ function PostEvent() {
                   name="category"
                   value="tech"
                   onChange={getInput}
+                  checked={event.category==="tech"}
                   className="accent-purple-900"
                 />
                 <label htmlFor="tech">Tech</label>
@@ -77,6 +77,7 @@ function PostEvent() {
                   name="category"
                   value="workshop"
                   onChange={getInput}
+                  checked={event.category==="workshop"}
                   className="accent-purple-900"
                 />
                 <label htmlFor="workshop">Workshop</label>
@@ -89,6 +90,7 @@ function PostEvent() {
                   name="category"
                   value="education"
                   onChange={getInput}
+                  checked={event.category==="education"}
                   className="accent-purple-900"
                 />
                 <label htmlFor="education">Education</label>
@@ -101,6 +103,7 @@ function PostEvent() {
                   name="category"
                   value="sports"
                   onChange={getInput}
+                  checked={event.category==="sports"}
                   className="accent-purple-900"
                 />
                 <label htmlFor="sports">Sports</label>
@@ -113,6 +116,7 @@ function PostEvent() {
                   name="category"
                   value="business"
                   onChange={getInput}
+                  checked={event.category==="business"}
                   className="accent-purple-900"
                 />
                 <label htmlFor="business">Business</label>
@@ -137,12 +141,13 @@ function PostEvent() {
             <p>Select City:</p>
             <div className="flex gap-10">
               <div className="flex gap-2">
-                <input type="radio" id="Lahore" name="city" value="Lahore" onChange={getInput} className="accent-purple-900"/>
+                <input type="radio" id="Lahore" name="city" value="Lahore" onChange={getInput} 
+                checked={event.city==="Lahore"} className="accent-purple-900"/>
                 <label htmlFor="Lahore">Lahore</label>
               </div>
 
               <div className="flex gap-2">
-                <input type="radio" id="Islamabad" name="city" value="Islamabad" onChange={getInput} className="accent-purple-900"/>
+                <input type="radio" id="Islamabad" name="city" value="Islamabad" onChange={getInput} checked={event.city==="Islamabad"} className="accent-purple-900"/>
                 <label htmlFor="Islamabad">Islamabad</label>
               </div>
             </div>
