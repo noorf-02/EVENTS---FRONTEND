@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 function PostEvent() {
+    const [message,setMessage] = useState('');
     const [event,setEvent] = useState({
         title:'',
         description:'',
@@ -53,6 +54,7 @@ function PostEvent() {
               className="border-1 border-gray-300 rounded-[6px] py-2 px-3 focus:outline-none"
             />
           </div>
+          <p>{message}</p>
 
           <div className="flex flex-col gap-5">
             <p>Select Category:</p>
