@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function PostEvent() {
   const [message, setMessage] = useState("");
@@ -17,38 +19,71 @@ function PostEvent() {
     organizerName: "",
   });
 
+  const navigate = useNavigate();
+
   function getInput(e) {
     const { name, value } = e.target;
     setEvent({ ...event, [name]: value });
     console.log({ ...event, [name]: value });
 
-    if(name==="title"){
-        if(value.length>=50){
-            settitleMessage('Limit reached!')
+    if (name === "title") {
+      if (value.length >= 50) {
+        settitleMessage("Limit reached!");
+      } else {
+        settitleMessage("");
+      }
+    }
+
+    if (name === "description") {
+      if (value.length >= 500) {
+        setMessage("Limit reached!");
+      } else {
+        setMessage("");
+      }
+    }
+  }
+
+  async function submitEvent(e) {
+    e.preventDefault();
+    const token = localStorage.getItem('token');
+    try {
+      const res = await axios.post("http://localhost:5000/post-event", event,{
+        headers:{
+          Authorization: `Bearer ${token}`
         }
-        else{
-            settitleMessage('');
+      });
+      console.log("Event submitted");
+      setEvent({
+        title: "",
+        description: "",
+        category: "",
+        venue: "",
+        city: "",
+        date: "",
+        startAt: "",
+        endAt: "",
+        capacity: "",
+        contact: "",
+        organizerName: "",
+      });
+      navigate("pending-approvals");
+    } catch (error) {
+      console.log("STATUS:", error.response?.status);
+      console.log("DATA:", error.response?.data);
     }
-    }
-
-     if (name === "description") {
-    if (value.length >= 500) {
-      setMessage("Limit reached!");
-    } else {
-    setMessage('');
-}
   }
-  }
-
- 
 
   return (
     <>
       <div className="wrapper flex flex-col items-center justify-center py-10 gap-10">
         <h1 className="text-3xl font-medium text-[#3e3e3e]">
-          Make your event today!
+          Make your event:
         </h1>
-        <form action="" className="flex flex-col gap-9 w-[900px]">
+        <form
+          onSubmit={submitEvent}
+          action=""
+          className="flex flex-col gap-9 w-[900px]"
+        >
           <h1 className="text-[18px] font-medium">Event Details:</h1>
           <div className="flex flex-col gap-5">
             <label htmlFor="title">Event Title:</label>
@@ -63,8 +98,10 @@ function PostEvent() {
               className="border-1 border-gray-300 rounded-[6px] py-2 px-3 focus:outline-none"
             />
             <div className="flex items-center justify-between">
-                <p className="text-red-900 font-medium">{titleMessage}</p>
-              <p className="text-right italic text-[#9a9a9a]">{event.title.length}/50</p>
+              <p className="text-red-900 font-medium">{titleMessage}</p>
+              <p className="text-right italic text-[#9a9a9a]">
+                {event.title.length}/50
+              </p>
             </div>
           </div>
 
@@ -81,8 +118,10 @@ function PostEvent() {
               className="border-1 border-gray-300 rounded-[6px] py-2 px-3 focus:outline-none"
             />
             <div className="flex items-center justify-between">
-                <p className="text-red-900 font-medium">{message}</p>
-              <p className="text-right italic text-[#9a9a9a]">{event.description.length}/500</p>
+              <p className="text-red-900 font-medium">{message}</p>
+              <p className="text-right italic text-[#9a9a9a]">
+                {event.description.length}/500
+              </p>
             </div>
           </div>
 
