@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 function PostEvent() {
   const [message, setMessage] = useState("");
   const [titleMessage, settitleMessage] = useState("");
+  const [fieldMessage, setfieldMessage] = useState("");
   const [event, setEvent] = useState({
     title: "",
     description: "",
@@ -45,44 +47,66 @@ function PostEvent() {
 
   async function submitEvent(e) {
     e.preventDefault();
-    const token = localStorage.getItem('token');
-    try {
-      const res = await axios.post("http://localhost:5000/post-event", event,{
-        headers:{
-          Authorization: `Bearer ${token}`
-        }
-      });
-      console.log("Event submitted");
-      setEvent({
-        title: "",
-        description: "",
-        category: "",
-        venue: "",
-        city: "",
-        date: "",
-        startAt: "",
-        endAt: "",
-        capacity: "",
-        contact: "",
-        organizerName: "",
-      });
-      navigate("host-dashboard/pending-approvals");
-    } catch (error) {
-      console.log("STATUS:", error.response?.status);
-      console.log("DATA:", error.response?.data);
+    const token = localStorage.getItem("token");
+
+    if (
+      !event.title ||
+      !event.description ||
+      !event.category ||
+      !event.venue ||
+      !event.city ||
+      !event.date ||
+      !event.startAt ||
+      !event.endAt ||
+      !event.capacity ||
+      !event.contact ||
+      !event.organizerName
+    ) {
+      toast.error("Please fill all fields first!");
+    } else {
+      try {
+        const res = await axios.post(
+          "http://localhost:5000/post-event",
+          event,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          },
+        );
+        console.log("Event submitted");
+        setEvent({
+          title: "",
+          description: "",
+          category: "",
+          venue: "",
+          city: "",
+          date: "",
+          startAt: "",
+          endAt: "",
+          capacity: "",
+          contact: "",
+          organizerName: "",
+        });
+        navigate("/host-dashboard/pending-approvals");
+        toast.success("Event Created Successfully! Sent For Approval.");
+      } catch (error) {
+        console.log("STATUS:", error.response?.status);
+        console.log("DATA:", error.response?.data);
+      }
     }
   }
 
   return (
     <>
       <div className="wrapper flex flex-col items-center justify-center py-10 gap-10">
-        <h1 className="text-3xl font-medium text-[#3e3e3e]">
+        <h1 className="sm:text-3xl text-2xl font-medium text-[#3e3e3e]">
           Make your event:
         </h1>
         <form
           onSubmit={submitEvent}
           action=""
-          className="flex flex-col gap-9 w-[900px]"
+          className="px-2 flex flex-col gap-9 sm:w-[500px] lg:w-[900px]"
         >
           <h1 className="text-[18px] font-medium">Event Details:</h1>
           <div className="flex flex-col gap-5">
@@ -127,7 +151,7 @@ function PostEvent() {
 
           <div className="flex flex-col gap-5">
             <p>Select Category:</p>
-            <div className="flex justify-between">
+            <div className="flex flex-wrap justify-around gap-3">
               <div className="flex gap-2">
                 <input
                   type="radio"
