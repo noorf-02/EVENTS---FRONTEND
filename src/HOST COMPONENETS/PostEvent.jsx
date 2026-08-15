@@ -66,7 +66,7 @@ function PostEvent() {
         contact: "",
         organizerName: "",
       });
-      navigate("pending-approvals");
+      navigate("host-dashboard/pending-approvals");
     } catch (error) {
       console.log("STATUS:", error.response?.status);
       console.log("DATA:", error.response?.data);
