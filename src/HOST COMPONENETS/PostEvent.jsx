@@ -1,26 +1,47 @@
 import React, { useState } from "react";
 
 function PostEvent() {
-    const [message,setMessage] = useState('');
-    const [event,setEvent] = useState({
-        title:'',
-        description:'',
-        category:'',
-        venue:'',
-        city:'',
-        date:'',
-        startAt:'',
-        endAt:'',
-        capacity:'',
-        contact:'',
-        organizerName:''
-    });
+  const [message, setMessage] = useState("");
+  const [titleMessage, settitleMessage] = useState("");
+  const [event, setEvent] = useState({
+    title: "",
+    description: "",
+    category: "",
+    venue: "",
+    city: "",
+    date: "",
+    startAt: "",
+    endAt: "",
+    capacity: "",
+    contact: "",
+    organizerName: "",
+  });
 
-    function getInput(e){
-        const {name,value} = e.target;
-        setEvent({...event,[name]:value});
-        console.log({...event,[name]:value})
+  function getInput(e) {
+    const { name, value } = e.target;
+    setEvent({ ...event, [name]: value });
+    console.log({ ...event, [name]: value });
+
+    if(name==="title"){
+        if(value.length>=50){
+            settitleMessage('Limit reached!')
+        }
+        else{
+            settitleMessage('');
     }
+    }
+
+     if (name === "description") {
+    if (value.length >= 500) {
+      setMessage("Limit reached!");
+    } else {
+    setMessage('');
+}
+  }
+  }
+
+ 
+
   return (
     <>
       <div className="wrapper flex flex-col items-center justify-center py-10 gap-10">
@@ -38,8 +59,13 @@ function PostEvent() {
               value={event.title}
               onChange={getInput}
               placeholder="Title"
+              maxLength={50}
               className="border-1 border-gray-300 rounded-[6px] py-2 px-3 focus:outline-none"
             />
+            <div className="flex items-center justify-between">
+                <p className="text-red-900 font-medium">{titleMessage}</p>
+              <p className="text-right italic text-[#9a9a9a]">{event.title.length}/50</p>
+            </div>
           </div>
 
           <div className="flex flex-col gap-5">
@@ -51,10 +77,14 @@ function PostEvent() {
               onChange={getInput}
               placeholder="Describe your event"
               rows="5"
+              maxLength={500}
               className="border-1 border-gray-300 rounded-[6px] py-2 px-3 focus:outline-none"
             />
+            <div className="flex items-center justify-between">
+                <p className="text-red-900 font-medium">{message}</p>
+              <p className="text-right italic text-[#9a9a9a]">{event.description.length}/500</p>
+            </div>
           </div>
-          <p>{message}</p>
 
           <div className="flex flex-col gap-5">
             <p>Select Category:</p>
@@ -66,7 +96,7 @@ function PostEvent() {
                   name="category"
                   value="tech"
                   onChange={getInput}
-                  checked={event.category==="tech"}
+                  checked={event.category === "tech"}
                   className="accent-purple-900"
                 />
                 <label htmlFor="tech">Tech</label>
@@ -79,7 +109,7 @@ function PostEvent() {
                   name="category"
                   value="workshop"
                   onChange={getInput}
-                  checked={event.category==="workshop"}
+                  checked={event.category === "workshop"}
                   className="accent-purple-900"
                 />
                 <label htmlFor="workshop">Workshop</label>
@@ -92,7 +122,7 @@ function PostEvent() {
                   name="category"
                   value="education"
                   onChange={getInput}
-                  checked={event.category==="education"}
+                  checked={event.category === "education"}
                   className="accent-purple-900"
                 />
                 <label htmlFor="education">Education</label>
@@ -105,7 +135,7 @@ function PostEvent() {
                   name="category"
                   value="sports"
                   onChange={getInput}
-                  checked={event.category==="sports"}
+                  checked={event.category === "sports"}
                   className="accent-purple-900"
                 />
                 <label htmlFor="sports">Sports</label>
@@ -118,7 +148,7 @@ function PostEvent() {
                   name="category"
                   value="business"
                   onChange={getInput}
-                  checked={event.category==="business"}
+                  checked={event.category === "business"}
                   className="accent-purple-900"
                 />
                 <label htmlFor="business">Business</label>
@@ -143,13 +173,28 @@ function PostEvent() {
             <p>Select City:</p>
             <div className="flex gap-10">
               <div className="flex gap-2">
-                <input type="radio" id="Lahore" name="city" value="Lahore" onChange={getInput} 
-                checked={event.city==="Lahore"} className="accent-purple-900"/>
+                <input
+                  type="radio"
+                  id="Lahore"
+                  name="city"
+                  value="Lahore"
+                  onChange={getInput}
+                  checked={event.city === "Lahore"}
+                  className="accent-purple-900"
+                />
                 <label htmlFor="Lahore">Lahore</label>
               </div>
 
               <div className="flex gap-2">
-                <input type="radio" id="Islamabad" name="city" value="Islamabad" onChange={getInput} checked={event.city==="Islamabad"} className="accent-purple-900"/>
+                <input
+                  type="radio"
+                  id="Islamabad"
+                  name="city"
+                  value="Islamabad"
+                  onChange={getInput}
+                  checked={event.city === "Islamabad"}
+                  className="accent-purple-900"
+                />
                 <label htmlFor="Islamabad">Islamabad</label>
               </div>
             </div>
@@ -235,7 +280,12 @@ function PostEvent() {
             </div>
           </div>
 
-          <button type="Submit" className="bg-green-900 hover:bg-green-950 transition-all duration-300 cursor-pointer text-white font-medium w-fit py-1 px-5 rounded-2xl">Submit</button>
+          <button
+            type="Submit"
+            className="bg-green-900 hover:bg-green-950 transition-all duration-300 cursor-pointer text-white font-medium w-fit py-1 px-5 rounded-2xl"
+          >
+            Submit
+          </button>
         </form>
       </div>
     </>
