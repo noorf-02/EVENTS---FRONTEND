@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 function ApprovalPending() {
   const [event, setEvent] = useState([]);
@@ -35,7 +36,7 @@ function ApprovalPending() {
       setEvent((currentEvents) =>
         currentEvents.filter((event) => event._id !== id),
       );
-      alert("Delete");
+      toast.error("Event deleted successfully!");
     } catch (error) {
       console.log(error.response?.data);
     }
@@ -59,7 +60,7 @@ function ApprovalPending() {
           console.log("My events:", myEvents);
 
           return (
-            <div className="event-card wrapper border-1 border-gray-100 rounded-2xl p-5 shadow-md flex flex-col gap-5">
+            <div className="event-card wrapper border-1 sm:w-[500px] w-[320px] lg:w-[900px] border-gray-100 rounded-2xl p-5 shadow-md flex flex-col gap-5">
               <div className="organizer flex justify-between">
                 <p className="text-gray-600 italic">
                   Organizer: {myEvents.organizerName}
@@ -68,7 +69,7 @@ function ApprovalPending() {
               </div>
 
               <div className="event-info flex flex-col gap-2">
-                <p className="text-2xl font-bold">{myEvents.title}</p>
+                <p className="sm:text-2xl text-[18px] font-bold break-words whitespace-normal">{myEvents.title}</p>
                 <div className="timing-date flex justify-between  text-[12px]">
                   <p className="text-gray-600">
                     Timings: {myEvents.startAt} - {myEvents.endAt}
@@ -85,11 +86,11 @@ function ApprovalPending() {
                 <p className="italic py-1 text-[14px] itali text-purple-900 rounded font-medium">
                   Category: {myEvents.category}
                 </p>
-                <p className="">"{myEvents.description}"</p>
+                <p className="break-words whitespace-normal">"{myEvents.description}"</p>
               </div>
 
-              <div className="location flex justify-between italic">
-                <p className="">Venue: {myEvents.venue}</p>
+              <div className="location flex flex-col justify-between italic lg:flex-row">
+                <p className="break-words whitespace-normal"><span className="font-bold">Venue: </span>{myEvents.venue}</p>
                 <p>{myEvents.city}</p>
               </div>
 
