@@ -22,6 +22,25 @@ function ApprovalPending() {
     getEvents();
   }, []);
 
+  async function deleteEvent(id) {
+    try {
+      const token = localStorage.getItem("token");
+      console.log("TOKEN", token);
+      const res = await axios.delete(`http://localhost:5000/delete-event/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      setEvent((currentEvents) =>
+        currentEvents.filter((event) => event._id !== id),
+      );
+      alert("Delete");
+    } catch (error) {
+      console.log(error.response?.data);
+    }
+  }
+
   return (
     <>
       <div className="wrapper flex flex-col items-center justify-center py-10 gap-10">
@@ -79,7 +98,10 @@ function ApprovalPending() {
               </p>
 
               <div className="btns flex gap-2">
-                <button className="bg-red-800 hover:bg-red-700 cursor-pointer transition-all duration-300 text-white font-medium py-1 px-2 rounded-[6px] w-[70px]">
+                <button
+                  onClick={()=>{deleteEvent(myEvents._id)}}
+                  className="bg-red-800 hover:bg-red-700 cursor-pointer transition-all duration-300 text-white font-medium py-1 px-2 rounded-[6px] w-[70px]"
+                >
                   Delete
                 </button>
                 <button className="bg-green-800 hover:bg-green-700 cursor-pointer transition-all duration-300 text-white font-medium py-1 px-2 rounded-[6px] w-[70px]">
