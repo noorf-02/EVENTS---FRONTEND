@@ -13,6 +13,7 @@ import Dashboard from "./HOST COMPONENETS/Dashboard";
 import LogOut from "./HOST COMPONENETS/LogOut";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import EditEvent from "./HOST COMPONENETS/EditEvent";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
           <Route path="post-event" element={<PostEvent />} />
           <Route path="pending-approvals" element={<ApprovalPending />} />
           <Route path="events-live" element={<ApprovedEvents />} />
+          <Route path="edit-event/:id" element={<EditEvent/>}/>
         </Route>
 
         <Route path="/attendee-dashboard" element={<AttendeeDashboard />} />

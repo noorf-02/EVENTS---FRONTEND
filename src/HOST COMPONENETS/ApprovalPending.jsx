@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import { editEvent } from "../../../Server/CONTROLLER/event";
 
 function ApprovalPending() {
   const [event, setEvent] = useState([]);
-  async function getEvents() {
+  const navigate = useNavigate();
+    async function getEvents() {
     try {
       const token = localStorage.getItem("token");
       console.log("TOKEN", token);
@@ -41,7 +44,6 @@ function ApprovalPending() {
       console.log(error.response?.data);
     }
   }
-
   return (
     <>
       <div className="wrapper flex flex-col items-center justify-center py-10 gap-10">
@@ -56,7 +58,8 @@ function ApprovalPending() {
       </div>
 
       <div className="events-map flex flex-col gap-2">
-        {event.map((myEvents) => {
+        {event.length===0 ? (<p className="wrapper text-2xl text-gray-400 italic">No events yet!</p>
+        ) : ( event.map((myEvents) => {
           console.log("My events:", myEvents);
 
           return (
@@ -105,13 +108,13 @@ function ApprovalPending() {
                 >
                   Delete
                 </button>
-                <button className="bg-green-800 hover:bg-green-700 cursor-pointer transition-all duration-300 text-white font-medium py-1 px-2 rounded-[6px] w-[70px]">
+                <button onClick={()=>navigate(`edit-event/${myEvents._id}`)} className="bg-green-800 hover:bg-green-700 cursor-pointer transition-all duration-300 text-white font-medium py-1 px-2 rounded-[6px] w-[70px]">
                   Edit
                 </button>
               </div>
             </div>
           );
-        })}
+        }))}
       </div>
     </>
   );
