@@ -11,10 +11,10 @@ function HostLanding() {
   const [logout, setLogout] = useState(false);
   const navigate = useNavigate();
 
-  function logoutFunction(){
-    localStorage.removeItem('token');
-    navigate('/')
-    console.log('logged out');
+  function logoutFunction() {
+    localStorage.removeItem("token");
+    navigate("/");
+    console.log("logged out");
   }
   return (
     <>
@@ -33,7 +33,7 @@ function HostLanding() {
       </div>
       {/* MOBILE */}
       <div className="md:hidden flex">
-        <main>
+        <main className="flex-1 min-w-0 w-0">
           <Outlet />
         </main>
 
@@ -72,7 +72,10 @@ function HostLanding() {
                   </Link>
                 </div>
 
-                <button onClick={() => setLogout(!logout)} className="bg-purple-900 hover:bg-purple-800 transition-all duration-300 cursor-pointer text-white font-bold py-1 rounded-2xl">
+                <button
+                  onClick={() => setLogout(!logout)}
+                  className="bg-purple-900 hover:bg-purple-800 transition-all duration-300 cursor-pointer text-white font-bold py-1 rounded-2xl"
+                >
                   Log Out
                 </button>
               </div>
@@ -128,14 +131,13 @@ function HostLanding() {
             </button>
           </div>
         </aside>
-        <main className="flex-1">
+        <main className="flex-1 min-w-0 w-0">
           <Outlet />
         </main>
       </div>
       {/* logOut  */}
 
-      {logout &&
-      (
+      {logout && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
           <div className="bg-white w-[320px] rounded-2xl p-6 shadow-xl">
             <h2 className="text-xl font-bold text-[#2e2e2e]">Log out?</h2>
@@ -161,8 +163,7 @@ function HostLanding() {
             </div>
           </div>
         </div>
-      )
-    }
+      )}
     </>
   );
 }

@@ -4,4 +4,7 @@
   .wrapper{
     @apply w-[95%] mx-auto my-3 p-2
   }
+  .wrapper-1 {
+  @apply w-[95%] max-w-[1400px] mx-auto my-3 p-2;
+}
 }
